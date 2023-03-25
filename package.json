@@ -1,0 +1,25 @@
+{
+    "name": "edml",
+    "displayName": "EDML",
+    "description": "",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.76.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "edml",
+            "aliases": ["EDML", "edml"],
+            "extensions": [".edml"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "edml",
+            "scopeName": "source.edml",
+            "path": "./syntaxes/edml.tmLanguage.json"
+        }]
+    }
+}
