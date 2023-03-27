@@ -17,12 +17,18 @@ class EdmlCompletionItemProvider {
 		builtins.push(...[
 			'const'
 		].map(i => new vscode.CompletionItem(i, vscode.CompletionItemKind.Constant)))
+		
+		let controls = [];
+		controls.push(...[
+			'if', 'else', 'switch', 'try', 'catch', 'for', 'while', 'do', 'delete', 'break', 'continue', 'return', 'throw', 'require'
+		].map(i => new vscode.CompletionItem(i, vscode.CompletionItemKind.Keyword)))
 
 		if (context.triggerCharacter == null) {
 			completionList.push(...builtins);
 			completionList.push(...[
 				'builtin', 'global'
 			].map(i => new vscode.CompletionItem(i, vscode.CompletionItemKind.Keyword)))
+			completionList.push(...controls)
 		} else if (context.triggerCharacter == '.') {
 			let parentName = document.getText(new vscode.Range(new vscode.Position(0, 0), position))
 				.match(/([0-9a-zA-Z_.\s]+)\.$/)?.[1].replace(/\s/g, '')
