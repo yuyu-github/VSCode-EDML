@@ -2,10 +2,340 @@
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "EDML",
 	"patterns": [
-		
+		{ "include": "#comments" },
+		{ "include": "#keywords" },
+		{ "include": "#operators" },
+		{ "include": "#values" },
+		{ "include": "#identifiers" }
 	],
 	"repository": {
-
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line.double-slash.edml",
+					"match": "//.*"
+				},
+				{
+					"name": "comment.block.edml",
+					"begin": "/\\*",
+					"end": "\\*/"
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.conditional.edml",
+					"match": "\\b(if|else)\\b"
+				},
+				{
+					"name": "keyword.control.switch.edml",
+					"match": "\\bswitch\\b"
+				},
+				{
+					"name": "keyword.control.trycatch.edml",
+					"match": "\\b(try|catch)\\b"
+				},
+				{
+					"name": "keyword.control.loop.edml",
+					"match": "\\b(for|while|do)\\b"
+				},
+				{
+					"name": "keyword.control.delete.edml",
+					"match": "\\bdelete\\b"
+				},
+				{
+					"name": "keyword.control.flow.edml",
+					"match": "\\b(break|continue|return|throw)\\b"
+				},
+				{
+					"name": "variable.language.edml",
+					"match": "\\b(global|builtin)\\b"
+				}
+			]
+		},
+		"operators": {
+			"patterns": [
+				{
+					"name": "keyword.operator.bitwise.shift.edml",
+					"match": "<<|>>>|>>"
+				},
+				{
+					"name": "keyword.operator.comparison.edml",
+					"match": "==|!="
+				},
+				{
+					"name": "keyword.operator.relational.edml",
+					"match": "<=|>=|[<>]"
+				},
+				{
+					"name": "keyword.operator.assignment.edml",
+					"match": "=(?!>)"
+				},
+				{
+					"name": "keyword.operator.logical.edml",
+					"match": "\\|\\||\\?\\?|&&|!"
+				},
+				{
+					"name": "keyword.operator.bitwise.edml",
+					"match": "[|^&~]"
+				},
+				{
+					"name": "keyword.operator.increment.edml",
+					"match": "\\+\\+"
+				},
+				{
+					"name": "keyword.operator.decrement.edml",
+					"match": "--"
+				},
+				{
+					"name": "keyword.operator.arithmetic.edml",
+					"match": "\\*\\*|[+\\-*/%]"
+				},
+				{
+					"name": "keyword.operator.in.edml",
+					"match": "\\bin\\b"
+				},
+				{
+					"begin": "(\\?)",
+					"end": "(\\:)",
+					"beginCaptures": {
+						"1": {
+							"patterns": [
+								{
+									"name": "keyword.operator.conditional.edml",
+									"match": "\\?"
+								}
+							]
+						}
+					},
+					"endCaptures": {
+						"1": {
+							"patterns": [
+								{
+									"name": "keyword.operator.conditional.edml",
+									"match": ":"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"identifiers": {
+			"patterns": [
+				{
+					"name": "entity.name.function",
+					"match": "\\b[a-zA-Z_][0-9a-zA-Z_]*(?=\\s*\\()"
+				},
+				{
+					"name": "variable.other.edml",
+					"match": "\\b[a-zA-Z_][0-9a-zA-Z_]*\\b"
+				}
+			]
+		},
+		"values": {
+			"patterns": [
+				{
+					"name": "constant.language.null.edml",
+					"match": "\\bnull\\b"
+				},
+				{ "include": "#booleans" },
+				{ "include": "#numbers" },
+				{ "include": "#strings" },
+				{ "include": "#arrays" },
+				{ "include": "#objects" },
+				{ "include": "#lambdaexps" }
+			],
+			"repository": {
+				"booleans": {
+					"patterns": [
+						{
+							"name": "constant.language.boolean.true.edml",
+							"match": "\\btrue\\b"
+						},
+						{
+							"name": "constant.language.boolean.false.edml",
+							"match": "\\bfalse\\b"
+						}
+					]
+				},
+				"numbers": {
+					"patterns": [
+						{
+							"name": "constant.numeric.binary.edml",
+							"match": "\\b0[bB][01]+\\b"
+						},
+						{
+							"name": "constant.numeric.octal.edml",
+							"match": "\\b0[oO][0-7]+\\b"
+						},
+						{
+							"name": "constant.numeric.hex.edml",
+							"match": "\\b0[xX][0-9a-fA-F]+\\b"
+						},
+						{
+							"name": "constant.numeric.decimal.edml",
+							"match": "\\b(\\d+\\.?\\d*|\\.\\d+)([eE][+-]?\\d+)?\\b"
+						}
+					]
+				},
+				"strings": {
+					"patterns": [
+						{
+							"name": "string.quoted.single.edml",
+							"match": "'(.*)'",
+							"captures": {
+								"1": {
+									"patterns": [
+										{ "include": "#escape" }
+									]
+								} 
+							}
+						},
+						{
+							"name": "string.quoted.single.edml",
+							"begin": "@'",
+							"end": "'(?!')",
+							"patterns": [
+								{
+									"name": "constant.character.escape.edml",
+									"match": "''"
+								}
+							]
+						},
+						{
+							"name": "string.quoted.double.edml",
+							"match": "\"(.*)\"",
+							"captures": {
+								"1": {
+									"patterns": [
+										{ "include": "#escape" },
+										{
+											"name": "meta.interpolation.edml",
+											"match": "\\{(.+)\\}",
+											"captures": {
+												"1": {
+													"patterns": [
+														{ "include": "$self" }
+													]
+												}
+											}
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "string.quoted.double.edml",
+							"begin": "@\"",
+							"end": "\"(?!\")",
+							"patterns": [
+								{
+									"name": "constant.character.escape.edml",
+									"match": "\"\""
+								},
+								{
+									"name": "meta.interpolation.edml",
+									"begin": "\\{",
+									"end": "\\}",
+									"patterns": [
+										{ "include": "$self" }
+									]
+								}
+							]
+						}
+					],
+					"repository": {
+						"escape": {
+							"patterns": [
+								{
+									"name": "constant.character.escape.edml",
+									"match": "\\\\u\\{[^}]*\\}"
+								},
+								{
+									"name": "constant.character.escape.edml",
+									"match": "\\\\u.{4}"
+								},
+								{
+									"name": "constant.character.escape.edml",
+									"match": "\\\\x.{2}"
+								},
+								{
+									"name": "constant.character.escape.edml",
+									"match": "\\\\."
+								}
+							]
+						}
+					}
+				},
+				"arrays": {
+					"name": "meta.array.edml",
+					"begin": "\\[",
+					"end": "\\]",
+					"patterns": [
+						{ "include": "$self" }
+					]
+				},
+				"objects": {
+					"name": "meta.object.edml",
+					"begin": "\\{",
+					"end": "\\}",
+					"patterns": [
+						{
+							"match": "(.*)\\s*:",
+							"captures": {
+								"1": {
+									"patterns": [
+										{
+											"name": "entity.name.tag.edml",
+											"match": "[a-zA-Z_][0-9a-zA-Z_]*"
+										}
+									]
+								}
+							}
+						},
+						{ "include": "$self" }
+					]
+				},
+				"lambdaexps": {
+					"patterns": [
+						{
+							"match": "([a-zA-Z_][0-9a-zA-Z_]*\\s*)?(=>)",
+							"captures": {
+								"1": {
+									"patterns": [
+										{ "include": "#parameter" }
+									]
+								},
+								"2": {
+									"name": "storage.type.function.arrow.edml"
+								}
+							}
+						},
+						{
+							"name": "meta.function.parameters.edml",
+							"begin": "\\(",
+							"end": "\\)\\s*=>",
+							"patterns": [
+								{ "include": "#parameter" }
+							]
+						}
+					],
+					"repository": {
+						"parameter": {
+							"patterns": [
+								{
+									"name": "variable.parameter.edml",
+									"match": "(?<!=\\s*)[a-zA-Z_][0-9a-zA-Z_]*"
+								},
+								{ "include": "$self" }
+							]
+						}
+					}
+				}
+			}
+		}
 	},
 	"scopeName": "source.edml"
 }
