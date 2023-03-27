@@ -2,7 +2,9 @@
   "name": "edml",
   "displayName": "EDML",
   "description": "",
-  "version": "0.0.1",
+  "publisher": "yuyu",
+  "repository": "https://github.com/yuyu-github/VSCode-EDML",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.76.0"
   },
