@@ -310,40 +310,8 @@
 					]
 				},
 				"lambdaexps": {
-					"patterns": [
-						{
-							"match": "([a-zA-Z_][0-9a-zA-Z_]*\\s*)?(=>)",
-							"captures": {
-								"1": {
-									"patterns": [
-										{ "include": "#parameter" }
-									]
-								},
-								"2": {
-									"name": "storage.type.function.arrow.edml"
-								}
-							}
-						},
-						{
-							"name": "meta.function.parameters.edml",
-							"begin": "\\(",
-							"end": "\\)\\s*=>",
-							"patterns": [
-								{ "include": "#parameter" }
-							]
-						}
-					],
-					"repository": {
-						"parameter": {
-							"patterns": [
-								{
-									"name": "variable.parameter.edml",
-									"match": "(?<!=\\s*)[a-zA-Z_][0-9a-zA-Z_]*"
-								},
-								{ "include": "$self" }
-							]
-						}
-					}
+					"name": "storage.type.function.arrow.edml",
+					"match": "=>"
 				}
 			}
 		}
