@@ -49,6 +49,10 @@
 					"match": "\\b(break|continue|return|throw)\\b"
 				},
 				{
+					"name": "keyword.control.require.edml",
+					"match": "\\brequire\\b"
+				},
+				{
 					"name": "variable.language.edml",
 					"match": "\\b(global|builtin)\\b"
 				},
