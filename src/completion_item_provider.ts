@@ -20,7 +20,7 @@ export class EdmlCompletionItemProvider {
 		
 		let controls = [];
 		controls.push(...[
-			'if', 'else', 'switch', 'try', 'catch', 'for', 'while', 'do', 'delete', 'break', 'continue', 'return', 'throw', 'require'
+			'if', 'else', 'switch', 'case', 'default', 'try', 'catch', 'for', 'while', 'do', 'delete', 'break', 'continue', 'return', 'throw', 'require'
 		].map(i => new vscode.CompletionItem(i, vscode.CompletionItemKind.Keyword)))
 
 		if (context.triggerCharacter == null) {

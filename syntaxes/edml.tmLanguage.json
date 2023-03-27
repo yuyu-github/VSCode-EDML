@@ -30,7 +30,7 @@
 				},
 				{
 					"name": "keyword.control.switch.edml",
-					"match": "\\bswitch\\b"
+					"match": "\\b(switch|case|default)\\b"
 				},
 				{
 					"name": "keyword.control.trycatch.edml",
