@@ -51,6 +51,17 @@
 				{
 					"name": "variable.language.edml",
 					"match": "\\b(global|builtin)\\b"
+				},
+				{
+					"match": "\\b(const)(?:\\s*\\.\\s*([a-zA-Z_][0-9a-zA-Z_]*))?\\b",
+					"captures": {
+						"1": {
+							"name": "variable.other.constant.edml"
+						},
+						"2": {
+							"name": "variable.other.constant.edml"
+						}
+					}
 				}
 			]
 		},
