@@ -24,7 +24,12 @@
       "language": "edml",
       "scopeName": "source.edml",
       "path": "./syntaxes/edml.tmLanguage.json"
-    }]
+    }],
+    "snippets": [{
+      "language": "edml",
+      "scopeName":"source.edml",
+      "path": "./snippet/edml.snippet.json"
+		}]
   },
   "scripts": {
 		"vscode:prepublish": "npm run compile",
