@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 
-export class EdmlCompletionItemProvider {
+export class EdmlCompletionItemProvider implements vscode.CompletionItemProvider {
 	provideCompletionItems(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken, context: vscode.CompletionContext) {
 		let completionList: vscode.CompletionItem[] = [];
 
