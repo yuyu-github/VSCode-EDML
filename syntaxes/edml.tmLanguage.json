@@ -199,7 +199,7 @@
 					"patterns": [
 						{
 							"name": "string.quoted.single.edml",
-							"match": "'(.*)'",
+							"match": "'(([^'\\\\]|\\\\.)*)'",
 							"captures": {
 								"1": {
 									"patterns": [
@@ -221,7 +221,7 @@
 						},
 						{
 							"name": "string.quoted.double.edml",
-							"match": "\"(.*)\"",
+							"match": "\"(([^\"\\\\]|\\\\.)*)\"",
 							"captures": {
 								"1": {
 									"patterns": [
