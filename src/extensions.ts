@@ -1,9 +1,9 @@
 import * as vscode from 'vscode';
-import { EdmlCompletionItemProvider } from './completion_item_provider';
+import { EdmlCompletionItemProvider } from './completion';
 
 export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
-		vscode.languages.registerCompletionItemProvider('edml', new EdmlCompletionItemProvider(), '.')
+		vscode.languages.registerCompletionItemProvider('edml', new EdmlCompletionItemProvider(), '.'),
 	);
 }
 
