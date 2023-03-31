@@ -4,7 +4,7 @@
   "description": "",
   "publisher": "yuyu",
   "repository": "https://github.com/yuyu-github/VSCode-EDML",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "engines": {
     "vscode": "^1.76.0"
   },
