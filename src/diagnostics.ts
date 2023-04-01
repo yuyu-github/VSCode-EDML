@@ -2,7 +2,8 @@ import * as vscode from 'vscode';
 import { diagnosticCollection } from './extensions.js';
 import * as parser from './parser/parser.js';
 
-export function createDiagnostics(document: vscode.TextDocument) {
+export function createDiagnostics(document: vscode.TextDocument | undefined) {
+  if (document == undefined) return;
   let diagnostics: vscode.Diagnostic[] = [];
   try {
     parser.parse(document.getText())

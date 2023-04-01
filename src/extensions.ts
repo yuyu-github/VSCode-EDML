@@ -6,10 +6,12 @@ import { createDiagnostics } from './diagnostics';
 export let diagnosticCollection: vscode.DiagnosticCollection;
 
 export function activate(context: vscode.ExtensionContext) {
+	diagnosticCollection = vscode.languages.createDiagnosticCollection('edml')
+	createDiagnostics(vscode.window.activeTextEditor?.document);
 	context.subscriptions.push(
-		diagnosticCollection = vscode.languages.createDiagnosticCollection('edml'),
 		vscode.languages.registerCompletionItemProvider('edml', new EdmlCompletionItemProvider(), '.'),
 		vscode.languages.registerColorProvider('edml', new EdmlColorProvider()),
+		vscode.window.onDidChangeActiveTextEditor(e => createDiagnostics(e?.document)),
 		vscode.workspace.onDidChangeTextDocument(e => createDiagnostics(e.document))
 	);
 }
