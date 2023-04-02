@@ -3,7 +3,7 @@ import { diagnosticCollection } from './extensions.js';
 import * as parser from './parser/parser.js';
 
 export function createDiagnostics(document: vscode.TextDocument | undefined) {
-  if (document == undefined) return;
+  if (document == undefined || document.languageId != 'edml') return;
   let diagnostics: vscode.Diagnostic[] = [];
   try {
     parser.parse(document.getText())
